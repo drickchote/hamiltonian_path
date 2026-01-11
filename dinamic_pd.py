@@ -1,15 +1,7 @@
 from typing import Dict, Iterable, List
-import time
 
 def has_hamiltonian_path_bitmask(graph) -> bool:
-    """
-    Hamiltonian Path (decision) using DP with bitmask:
-        dp[mask][v] = True if there exists a path that visits exactly the vertices in 'mask'
-                      and ends at vertex v.
 
-    graph: adjacency list (directed or undirected). Vertices must be hashable.
-    Returns: True if there exists a Hamiltonian path, otherwise False.
-    """
     vertices = list(graph.keys())
     n = len(vertices)
     if n == 0:
@@ -61,23 +53,3 @@ def has_hamiltonian_path_bitmask(graph) -> bool:
     return dp[full_mask] != 0
 
 
-def main():
-    n, m = map(int, input().split())
-
-    graph = dict()
-    for i in range(m):
-        v1, v2 = input().split()
-        if v1 not in graph:
-            graph[v1] = set()
-        if v2 not in graph:
-            graph[v2] = set()
-        graph[v1].add(v2)
-        graph[v2].add(v1)
-
-    start_time = time.time()
-    result = has_hamiltonian_path_bitmask(graph)
-    end_time = time.time()
-    print(result)
-    print(f"Time taken: {(end_time - start_time) * 1000}  miliseconds")
-
-main()
